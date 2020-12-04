@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas width="500" height="500"></canvas>
+    <script>
+        var canvas = document.querySelector("canvas");
+        var ctx = canvas.getContext("2d");
+
+        ctx.save(); // save the default state
+
+        ctx.fillStyle = "green";
+        // translate 的平移操作要在渲染到画布之前进行，因为translate方法平移的是坐标系。在输出到画布中后在平移是无效的。
+        // ctz.save保存的是当前ctx当前的坐标系，不要理解为是当前画布的状态，通过ctx.restore能直接恢复到保存时的画布状态，其实恢复的只是坐标系
+        ctx.translate(100,100) 
+        ctx.fillRect(10, 10, 100, 100);
+
+        ctx.restore(); // restore to the default state
+        ctx.fillStyle = "green";
+        ctx.fillRect(10, 10, 100, 100);
+    </script>
+</body>
+</html>
